@@ -13,36 +13,41 @@ class Provinsi extends StatelessWidget {
           builder: (context, AsyncSnapshot<List<Post>> snapshot) {
             if (snapshot.hasData) {
               List<Post> dataPost = snapshot.data;
-
-              return ListView.builder(
-                itemCount: dataPost.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    child: Card(
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(5),
-                            child: Icon(
-                              Icons.android,
-                              size: 30,
-                              color: Colors.amber,
-                            ),
-                          ),
-                          Text('Kode Provinsi :' +
-                              dataPost[index].kode_provi.toString()),
-                          Text('Provinsi :' + dataPost[index].provinsi),
-                          Text('Positif :' +
-                              dataPost[index].kasus_posi.toString()),
-                          Text('Sembuh :' +
-                              dataPost[index].kasus_semb.toString()),
-                          Text('Meninggal :' +
-                              dataPost[index].kasus_meni.toString())
-                        ],
-                      ),
+              return SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DataTable(
+                      columns: [
+                        DataColumn(label: Text('Kode Provinsi')),
+                        DataColumn(label: Text('Provinsi')),
+                        DataColumn(label: Text('Positif')),
+                        DataColumn(label: Text('Sembuh')),
+                        DataColumn(label: Text('Meninggal')),
+                      ],
+                      rows: dataPost
+                          .map((Post dataPost) => DataRow(cells: [
+                                DataCell(Text(dataPost.kode_provi.toString())),
+                                DataCell(Text(dataPost.provinsi)),
+                                DataCell(Text(dataPost.kasus_posi.toString())),
+                                DataCell(Text(dataPost.kasus_semb.toString())),
+                                DataCell(Text(dataPost.kasus_meni.toString())),
+                              ]))
+                          .toList(),
+                    )),
+              );
+            } else {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  CircularProgressIndicator(strokeWidth: 5),
+                  Center(
+                    child: Text(
+                      "Harap Sabar Sedang Loading",
+                      style: TextStyle(height: 5),
                     ),
-                  );
-                },
+                  ),
+                ],
               );
             }
           }),

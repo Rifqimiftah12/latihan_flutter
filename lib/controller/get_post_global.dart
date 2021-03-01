@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import '../model/get_post_modelglob.dart';
 
-class GetPostProv {
-  final String getposturl = "https://api.kawalcorona.com/indonesia/provinsi";
+class GetPostGlob {
+  final String getposturl = "https://api.kawalcorona.com/";
 
   //Mengambil Data
   Future<List<Post>> manggilPostData() async {

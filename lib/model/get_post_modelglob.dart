@@ -2,28 +2,24 @@ import 'package:flutter/foundation.dart';
 
 class Post {
   //definisikan key nya
-  final int kode_provi;
-  final String provinsi;
-  final int kasus_posi;
-  final int kasus_semb;
-  final int kasus_meni;
-
+  final String country_region;
+  final int confirmed;
+  final int deaths;
+  final int recovered;
   //definisikan ke object
   Post(
-      {@required this.kode_provi,
-      @required this.provinsi,
-      @required this.kasus_posi,
-      @required this.kasus_semb,
-      @required this.kasus_meni});
+      {@required this.country_region,
+      @required this.confirmed,
+      @required this.deaths,
+      @required this.recovered});
 
   //menampung data dengan format json
   factory Post.fromJson(Map<String, dynamic> json) {
     return Post(
-      kode_provi: json['attributes']['Kode_Provi'] as int,
-      provinsi: json['attributes']['Provinsi'] as String,
-      kasus_posi: json['attributes']['Kasus_Posi'] as int,
-      kasus_semb: json['attributes']['Kasus_Semb'] as int,
-      kasus_meni: json['attributes']["Kasus_Meni"] as int,
+      country_region: json['attributes']['Country_Region'] as String,
+      confirmed: json['attributes']['Confirmed'] as int,
+      deaths: json['attributes']['Deaths'] as int,
+      recovered: json['attributes']['Recovered'] as int,
     );
   }
 }
